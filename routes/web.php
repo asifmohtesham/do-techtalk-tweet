@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Tweet;
+use App\Http\Controllers\TweetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +16,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+  $tweets = Tweet::all();
+
   return view('welcome', [
-    'message' => 'Setting up...'
+    'message' => 'Tweets',
+    'tweets' => $tweets,
   ]);
 });
+
+Route::get('/create-tweet', function () {
+  return view('create-tweet', [
+    'message' => "Create a Tweet",
+  ]);
+});
+
+Route::resource('tweets', TweetController::class);
