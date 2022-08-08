@@ -15,7 +15,7 @@ class TweetController extends Controller
   public function index()
   {
     //
-    $tweets = Tweet::all();
+    $tweets = Tweet::all()->sortDesc();
 
     return view('welcome', [
       'tweets' => $tweets,
@@ -44,7 +44,7 @@ class TweetController extends Controller
     //
     $data = $request->all();
     Tweet::create($data);
-    return redirect('/');
+    return redirect('/tweets');
   }
 
   /**
@@ -71,7 +71,7 @@ class TweetController extends Controller
   public function edit(Tweet $tweet)
   {
     //
-    return view('tweet.edit', [
+    return view('tweets.edit', [
       'tweet' => $tweet,
     ]);
   }
@@ -88,7 +88,7 @@ class TweetController extends Controller
     //
     $data = $request->all();
     $tweet->update($data);
-    return redirect("/tweets/" . $tweet->id);
+    return redirect("/tweets" . $tweet->id);
   }
 
   /**
@@ -101,6 +101,6 @@ class TweetController extends Controller
   {
     //
     $tweet->delete();
-    return redirect('/');
+    return redirect('/tweets');
   }
 }

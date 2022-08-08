@@ -16,7 +16,7 @@ use App\Http\Controllers\TweetController;
 */
 
 Route::get('/', function () {
-  $tweets = Tweet::all();
+  $tweets = Tweet::all()->sortDesc();
 
   return view('welcome', [
     'message' => 'Tweets',
